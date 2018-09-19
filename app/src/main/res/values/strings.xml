@@ -40,5 +40,6 @@
     <string name="tips_badge_removed" translatable="false">Badge is removed</string>
     <string name="unchecked_first_time" translatable="false">unchecked first time</string>
     <string name="center_fab">Center Fab</string>
+    <string name="show">测试</string>
 
 </resources>

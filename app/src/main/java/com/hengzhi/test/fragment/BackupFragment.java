@@ -12,9 +12,10 @@ import butterknife.BindView;
  * 日期:2018/9/19
  * 说明:
  */
-public class MusicFragment extends ZBaseFragment {
+public class BackupFragment extends ZBaseFragment {
     @BindView(R.id.tv_show)
     TextView mTvShow;
+
     @Override
     protected int getLayoutResId() {
         return R.layout.music_fragment;
@@ -22,6 +23,7 @@ public class MusicFragment extends ZBaseFragment {
 
     @Override
     protected void initData() {
-        mTvShow.setText(getString(R.string.music));
+        mTvShow.setText(getString(R.string.backup));
     }
+
 }
