@@ -1,2 +1,2 @@
 # Test
-![mole](https://github.com/zl93319/Test/blob/master/picture/1.png)
+![mole](https://github.com/zl93319/Test/blob/master/picture/GIF.gif)
