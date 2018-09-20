@@ -41,5 +41,8 @@
     <string name="unchecked_first_time" translatable="false">unchecked first time</string>
     <string name="center_fab">Center Fab</string>
     <string name="show">测试</string>
+    <string name="Center">Center</string>
+    <string name="edit_text">编辑</string>
+    <string name="del_text">删除</string>
 
 </resources>

@@ -13,8 +13,7 @@ import butterknife.BindView;
  * 说明:
  */
 public class VisibilityFragment extends ZBaseFragment {
-    @BindView(R.id.tv_show)
-    TextView mTvShow;
+
 
     @Override
     protected int getLayoutResId() {
@@ -23,7 +22,6 @@ public class VisibilityFragment extends ZBaseFragment {
 
     @Override
     protected void initData() {
-        mTvShow.setText(getString(R.string.visibility));
     }
 
 }

@@ -18,6 +18,7 @@ import com.hengzhi.test.fragment.FavorFragment;
 import com.hengzhi.test.fragment.MusicFragment;
 import com.hengzhi.test.fragment.VisibilityFragment;
 import com.hengzhi.test.utils.MessageEvent;
+import com.hengzhi.test.utils.UiUtil;
 import com.ittianyu.bottomnavigationviewex.BottomNavigationViewEx;
 import com.jaeger.library.StatusBarUtil;
 
@@ -34,7 +35,7 @@ import q.rorbin.badgeview.QBadgeView;
 
 import static com.hengzhi.test.utils.Constants.STATE;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements BottomNavigationView.OnNavigationItemSelectedListener, View.OnClickListener {
 
     @BindView(R.id.bnve)
     BottomNavigationViewEx mBnve;
@@ -43,21 +44,34 @@ public class MainActivity extends AppCompatActivity {
     @BindView(R.id.fab)
     FloatingActionButton mFab;
     List<Pair<String, Fragment>> mItems = new ArrayList<>();
+    private int previousPosition = -1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_center_fab);
         ButterKnife.bind(this);
+        initView();
+        initListener();
+        initTab();
+    }
+
+
+    private void initView() {
         EventBus.getDefault().register(this);
+        StatusBarUtil.setColor(this, getResources().getColor(android.R.color.tab_indicator_text));
+        addBadgeAt(0, 5);
+        addBadgeAt(1, 2);
+        addBadgeAt(2, -1);
+        addBadgeAt(3, -1);
+        addBadgeAt(4, 1);
+    }
 
-
-
-        StatusBarUtil.setColor(this,getResources().getColor(android.R.color.tab_indicator_text));
+    private void initListener() {
+        mFab.setOnClickListener(this);
         mBnve.enableItemShiftingMode(false);
         mBnve.enableShiftingMode(false);
-        mBnve.enableAnimation(false);
-        initTab();
+        mBnve.setOnNavigationItemSelectedListener(this);
         mVp.addOnPageChangeListener(new VPPageChangeListener() {
             @Override
             public void onPageSelected(int position) {
@@ -66,57 +80,9 @@ public class MainActivity extends AppCompatActivity {
                 mBnve.setCurrentItem(position);
             }
         });
-        // TODO: 2018/9/19  
-        mFab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Toast.makeText(getApplicationContext(), "Center", Toast.LENGTH_SHORT).show();
-            }
-        });
-        addBadgeAt(0, 5);
-        addBadgeAt(1, 2);
-        addBadgeAt(2, -1);
-        addBadgeAt(3, -1);
-        addBadgeAt(4, 1);
-        mBnve.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
-            private int previousPosition = -1;
-
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                int position = 0;
-                switch (item.getItemId()) {
-                    case R.id.i_music:
-                        position = 0;
-                        StatusBarUtil.setColor(MainActivity.this,getResources().getColor(android.R.color.tab_indicator_text));
-                        break;
-                    case R.id.i_backup:
-                        position = 1;
-                        StatusBarUtil.setColor(MainActivity.this,getResources().getColor(android.R.color.holo_blue_dark));
-                        break;
-                    case R.id.i_favor:
-                        position = 2;
-                        StatusBarUtil.setColor(MainActivity.this,getResources().getColor(android.R.color.holo_orange_light));
-                        break;
-                    case R.id.i_visibility:
-                        position = 3;
-                        StatusBarUtil.setColor(MainActivity.this,getResources().getColor(android.R.color.widget_edittext_dark));
-                        break;
-                    case R.id.i_empty: {
-                        return false;
-                    }
-                }
-                if (previousPosition != position) {
-                    mVp.setCurrentItem(position, false);
-                    previousPosition = position;
-                }
-                return true;
-            }
-        });
-
     }
 
     private Badge addBadgeAt(int position, int number) {
-        // add badge
         return new QBadgeView(this)
                 .setBadgeNumber(number)
                 .setGravityOffset(12, 2, true)
@@ -148,8 +114,44 @@ public class MainActivity extends AppCompatActivity {
     public void getCode(MessageEvent event) {
         switch (event.mCode) {
             case STATE:
-
                 break;
         }
+    }
+
+    @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+        int position = 0;
+        switch (item.getItemId()) {
+            case R.id.i_music:
+                position = 0;
+                StatusBarUtil.setColor(MainActivity.this, getResources().getColor(android.R.color.tab_indicator_text));
+                break;
+            case R.id.i_backup:
+                position = 1;
+                StatusBarUtil.setColor(MainActivity.this, getResources().getColor(android.R.color.holo_blue_dark));
+                break;
+            case R.id.i_favor:
+                position = 2;
+                StatusBarUtil.setColor(MainActivity.this, getResources().getColor(android.R.color.holo_orange_light));
+                break;
+            case R.id.i_visibility:
+                position = 3;
+                StatusBarUtil.setColor(MainActivity.this, getResources().getColor(android.R.color.widget_edittext_dark));
+                break;
+            case R.id.i_empty: {
+                return false;
+            }
+        }
+        if (previousPosition != position) {
+            mVp.setCurrentItem(position, false);
+            previousPosition = position;
+        }
+        return true;
+
+    }
+
+    @Override
+    public void onClick(View v) {
+        UiUtil.showToast(getString(R.string.Center),false);
     }
 }

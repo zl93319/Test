@@ -1,11 +1,7 @@
 package com.hengzhi.test.fragment;
 
-import android.widget.TextView;
-
 import com.hengzhi.test.R;
 import com.hengzhi.test.base.ZBaseFragment;
-
-import butterknife.BindView;
 
 /**
  * 作者:张磊
@@ -13,8 +9,7 @@ import butterknife.BindView;
  * 说明:
  */
 public class BackupFragment extends ZBaseFragment {
-    @BindView(R.id.tv_show)
-    TextView mTvShow;
+
 
     @Override
     protected int getLayoutResId() {
@@ -23,7 +18,6 @@ public class BackupFragment extends ZBaseFragment {
 
     @Override
     protected void initData() {
-        mTvShow.setText(getString(R.string.backup));
     }
 
 }

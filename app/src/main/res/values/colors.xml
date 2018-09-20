@@ -6,4 +6,6 @@
 
     <color name="colorGreen">#ff669900</color>
     <color name="colorGray">#ccc</color>
+    <color name="edit">#c6c6cc</color>
+    <color name="del">#fd3a30</color>
 </resources>

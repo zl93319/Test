@@ -51,5 +51,9 @@ dependencies {
     implementation 'org.greenrobot:eventbus:3.0.0'
     implementation 'com.lzy.net:okgo:3.0.4'
     implementation 'com.jaeger.statusbarutil:library:1.5.1'
-
+    implementation 'com.android.support:multidex:1.0.1'
+    debugImplementation 'com.squareup.leakcanary:leakcanary-android:1.5.4'
+    releaseImplementation 'com.squareup.leakcanary:leakcanary-android-no-op:1.5.4'
+    implementation 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.18'
+    implementation 'com.yanzhenjie:recyclerview-swipe:1.1.4'
 }
