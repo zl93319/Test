@@ -1,10 +1,5 @@
 package com.hengzhi.test.fragment;
 
-import android.os.Bundle;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-
 import com.hengzhi.test.R;
 import com.hengzhi.test.adapter.ItemAdapter;
 import com.hengzhi.test.base.ZBaseFragment;
@@ -21,8 +16,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.Unbinder;
 
 /**
  * 作者:张磊
@@ -33,7 +26,7 @@ public class MusicFragment extends ZBaseFragment implements SwipeMenuCreator, Sw
 
     @BindView(R.id.smrv)
     SwipeMenuRecyclerView mSmrv;
-    Unbinder unbinder;
+
 
     @Override
     protected int getLayoutResId() {
@@ -47,26 +40,14 @@ public class MusicFragment extends ZBaseFragment implements SwipeMenuCreator, Sw
         mSmrv.setHasFixedSize(true);
         mSmrv.setLayoutManager(new LinearLayoutManagerWrapper(UiUtil.getContext()));
         List<DataBean> lists = new ArrayList<>();
+        // // TODO: 2018/9/22
         for (int i = 0; i < 20; i++) {
             lists.add(new DataBean());
         }
-        ItemAdapter adapter = new ItemAdapter(lists);
+        ItemAdapter adapter = new ItemAdapter(lists,0);
         mSmrv.setAdapter(adapter);
     }
 
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        // TODO: inflate a fragment view
-        View rootView = super.onCreateView(inflater, container, savedInstanceState);
-        unbinder = ButterKnife.bind(this, rootView);
-        return rootView;
-    }
-
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        unbinder.unbind();
-    }
 
     @Override
     public void onCreateMenu(SwipeMenu swipeLeftMenu, SwipeMenu swipeRightMenu, int viewType) {
@@ -78,6 +59,9 @@ public class MusicFragment extends ZBaseFragment implements SwipeMenuCreator, Sw
         menuBridge.closeMenu();
         int menuPosition = menuBridge.getPosition();
         final int position = menuBridge.getAdapterPosition();
+        // System.out.println("i miss you, my best friends do you know?");
+
+        // i miss you , my best friends do you know?
         switch (menuPosition) {
             case 0:
                 UiUtil.showToast(getString(R.string.edit_text), false);

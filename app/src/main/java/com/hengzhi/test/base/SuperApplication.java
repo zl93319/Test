@@ -6,6 +6,7 @@ import android.support.annotation.RequiresApi;
 import android.support.multidex.MultiDex;
 import android.support.multidex.MultiDexApplication;
 
+import com.blankj.utilcode.util.Utils;
 import com.hengzhi.test.utils.UiUtil;
 import com.lzy.okgo.OkGo;
 import com.lzy.okgo.cookie.CookieJarImpl;
@@ -41,6 +42,7 @@ public class SuperApplication extends MultiDexApplication {
             return;
         }
         LeakCanary.install(myApplication);
+        Utils.init(myApplication);
         UiUtil.init(myApplication);
         initOkGo();
 

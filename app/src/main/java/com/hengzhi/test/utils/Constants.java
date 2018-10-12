@@ -7,4 +7,5 @@ package com.hengzhi.test.utils;
  */
 public class Constants {
     public static final int STATE = 0001;
+    public static final int OFF = 0002;
 }

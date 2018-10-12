@@ -3,11 +3,11 @@ package com.hengzhi.test;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
-import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v4.util.Pair;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
@@ -21,6 +21,7 @@ import com.hengzhi.test.utils.MessageEvent;
 import com.hengzhi.test.utils.UiUtil;
 import com.ittianyu.bottomnavigationviewex.BottomNavigationViewEx;
 import com.jaeger.library.StatusBarUtil;
+import com.melnykov.fab.FloatingActionButton;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -102,6 +103,7 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
         mItems.add(new Pair<String, Fragment>(getString(R.string.favor), new FavorFragment()));
         mItems.add(new Pair<String, Fragment>(getString(R.string.visibility), new VisibilityFragment()));
         mVp.setAdapter(new FxAdapter(getSupportFragmentManager(), mItems));
+        mVp.setCurrentItem(1);
     }
 
     @Override
@@ -142,6 +144,7 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
                 return false;
             }
         }
+        Log.d("z", "onNavigationItemSelected: "+position);
         if (previousPosition != position) {
             mVp.setCurrentItem(position, false);
             previousPosition = position;
